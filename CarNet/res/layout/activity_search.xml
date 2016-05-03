@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 搜索栏 -->
+
+    <RelativeLayout
+      
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/csy_btn_h"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bag"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/search_topbar_back"
+            android:layout_width="50.0dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/csy_arr_back"
+            android:drawablePadding="5.0dip"
+            android:gravity="center_vertical"
+            android:onClick="onClick"
+            android:text="返回"
+            android:textColor="@color/all_text"
+            android:textSize="14.0sp" />
+
+        <LinearLayout
+            android:id="@+id/search_topbar_location_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search_location" />
+
+            <TextView
+                android:id="@+id/search_topbar_location_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="北京" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/search_topbar_edittext"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/csy_textbox"
+            android:ems="10"
+            android:focusable="true"
+            android:hint="请输入地点"
+            android:onClick="onClick"
+            android:padding="10dp"
+            android:textSize="@dimen/csy_text_ts" >
+
+         
+        </EditText>
+
+    </RelativeLayout>
+
+    <!-- 搜索栏 -->
+
+
+    <!-- 条目列表 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ListView
+            android:id="@+id/search_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:dividerHeight="1dp" >
+        </ListView>
+    </LinearLayout>
+    <!-- 条目列表 -->
+
+</LinearLayout>
