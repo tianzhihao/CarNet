@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dip"
+    android:weightSum="10" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:background="@drawable/dialog_background" >
+
+        <Button
+            android:id="@+id/main_custom_dialog_dismiss"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/wallet_nfc_charge_failure_icon" />
+
+        <Button
+            android:id="@+id/main_custom_dialog_next"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/dialog_direction_right" />
+
+        <TextView
+            android:id="@+id/main_custom_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_custom_dialog_dismiss"
+            android:layout_centerInParent="true"
+            android:text="金沙滩"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="8.5"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <ListView
+            android:id="@+id/main_custom_dialog_listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:dividerHeight="1dp" >
+        </ListView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/main_custom_dialog_ordergas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/all_btn"
+            android:onClick="onClick"
+            android:padding="10dp"
+            android:text="预约加油" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="#696969" />
+
+        <Button
+            android:id="@+id/main_custom_dialog_routeplan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/all_btn"
+            android:onClick="onClick"
+            android:padding="10dp"
+            android:text="到达这里" />
+    </RelativeLayout>
+
+</LinearLayout>
