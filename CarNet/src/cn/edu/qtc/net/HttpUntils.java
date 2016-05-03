@@ -9,7 +9,7 @@ import com.loopj.android.http.RequestParams;
 
 public class HttpUntils {
 	/**
-	 * 默认访问超时时间为10秒
+	 * 默认访问超时时间为10秒test
 	 */
 	private static AsyncHttpClient client = new AsyncHttpClient();
 
