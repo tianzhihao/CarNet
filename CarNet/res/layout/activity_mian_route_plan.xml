@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background" >
+
+    <LinearLayout
+        android:id="@+id/main_routeplan_start_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:orientation="horizontal"
+        android:padding="3dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:src="@drawable/icon_track_navi_end" />
+
+        <TextView
+            android:id="@+id/mian_route_start_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="当前位置"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="1dp"
+        android:layout_height="0.8dip"
+        android:layout_below="@id/main_routeplan_start_ll"
+        android:background="#696969" />
+
+    <LinearLayout
+        android:id="@+id/main_routeplan_end_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:orientation="horizontal"
+        android:padding="3dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:src="@drawable/icon_track_navi_start" />
+
+        <TextView
+            android:id="@+id/mian_route_end_tv"
+            style="@style/textview_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="你要去哪儿"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/main_route_plan"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:onClick="onClick"
+        android:src="@drawable/main_icon_route" />
+
+    <ImageButton
+        android:id="@+id/main_route_change"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/main_route_plan"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/main_route_plan"
+        android:onClick="onClick"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_change_location" />
+
+</RelativeLayout>
