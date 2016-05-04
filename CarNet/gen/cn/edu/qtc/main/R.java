@@ -223,18 +223,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int main_icon_route=0x7f020028;
         public static final int mylocation_sub_more=0x7f020029;
         public static final int nav_tts_download_resume_disabled=0x7f02002a;
-        public static final int search_location=0x7f02002b;
-        public static final int select_seat_btn=0x7f02002c;
-        public static final int shadow=0x7f02002d;
-        public static final int title_bar_menu_car=0x7f02002e;
-        public static final int title_bar_menu_personall=0x7f02002f;
-        public static final int traffic_search_form=0x7f020030;
-        public static final int wallet_nfc_charge_failure_icon=0x7f020031;
-        public static final int wallet_nfc_goback_btn_selected=0x7f020032;
+        public static final int qr_scan=0x7f02002b;
+        public static final int search_location=0x7f02002c;
+        public static final int select_seat_btn=0x7f02002d;
+        public static final int shadow=0x7f02002e;
+        public static final int title_bar_menu_car=0x7f02002f;
+        public static final int title_bar_menu_personall=0x7f020030;
+        public static final int traffic_search_form=0x7f020031;
+        public static final int wallet_nfc_charge_failure_icon=0x7f020032;
+        public static final int wallet_nfc_goback_btn_selected=0x7f020033;
     }
     public static final class id {
-        public static final int action_settings=0x7f04004c;
-        public static final int btnBack=0x7f04004a;
+        public static final int action_settings=0x7f04004d;
+        public static final int btnBack=0x7f04004b;
         public static final int btn_closeXSZ=0x7f040029;
         public static final int btn_cpsz=0x7f04001e;
         public static final int btn_query=0x7f040027;
@@ -250,8 +251,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int gv_1=0x7f040032;
         public static final int ico_chejia=0x7f040023;
         public static final int ico_engine=0x7f040026;
-        public static final int lab_address=0x7f040045;
-        public static final int lab_info=0x7f040047;
+        public static final int lab_address=0x7f040046;
+        public static final int lab_info=0x7f040048;
         public static final int left=0x7f040000;
         public static final int left_img_personinfo=0x7f040033;
         public static final int left_ll_carinfo=0x7f040035;
@@ -275,7 +276,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int main_routeplan_end_ll=0x7f040010;
         public static final int main_routeplan_start_ll=0x7f04000d;
         public static final int margin=0x7f040002;
-        public static final int menu_frame=0x7f040040;
+        public static final int menu_frame=0x7f040041;
         public static final int mian_route_end_tv=0x7f040011;
         public static final int mian_route_start_tv=0x7f04000e;
         public static final int mpnumber=0x7f040006;
@@ -299,17 +300,18 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int search_topbar_location_ll=0x7f040015;
         public static final int search_topbar_location_tv=0x7f040016;
         public static final int selected_view=0x7f040004;
-        public static final int slidingmenumain=0x7f040041;
+        public static final int slidingmenumain=0x7f040042;
         public static final int titbar=0x7f04001b;
         public static final int title_bar_menu_btn_left=0x7f04003f;
-        public static final int titlebar=0x7f040049;
-        public static final int txtTitle=0x7f04004b;
-        public static final int txt_name=0x7f040042;
+        public static final int title_bar_scanQRcode=0x7f040040;
+        public static final int titlebar=0x7f04004a;
+        public static final int txtTitle=0x7f04004c;
+        public static final int txt_name=0x7f040043;
         public static final int view=0x7f04000f;
-        public static final int wz_addr=0x7f040046;
-        public static final int wz_info=0x7f040048;
-        public static final int wz_money=0x7f040044;
-        public static final int wz_time=0x7f040043;
+        public static final int wz_addr=0x7f040047;
+        public static final int wz_info=0x7f040049;
+        public static final int wz_money=0x7f040045;
+        public static final int wz_time=0x7f040044;
     }
     public static final class layout {
         public static final int activity_carinfo=0x7f030000;
