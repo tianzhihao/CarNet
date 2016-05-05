@@ -1,5 +1,12 @@
 package cn.edu.qtc.main;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
 import org.apache.http.Header;
 
 import android.app.AlertDialog;
@@ -22,6 +29,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 import cn.edu.qtc.activity.SearchActivity;
+import cn.edu.qtc.car.dbhelper.CarDBDao;
+import cn.edu.qtc.car.jsonparser.CarJsonParser;
+import cn.edu.qtc.car.jsonparser.CarJsonParser.JsonParserCompleteCallBack;
 import cn.edu.qtc.config.Configs;
 import cn.edu.qtc.map.location.Location;
 import cn.edu.qtc.map.route.RoutePlan;
@@ -30,13 +40,15 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMap.OnMapLoadedCallback;
 import com.baidu.mapapi.map.TextureMapView;
+import com.dtr.zxing.activity.CaptureActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.server.car.domain.Car;
 
 public class MainActivity extends SlidingFragmentActivity implements
-		OnClickListener {
+		OnClickListener,JsonParserCompleteCallBack {
 
 	// ********地图相关********
 	// 地图基本组件
@@ -65,6 +77,10 @@ public class MainActivity extends SlidingFragmentActivity implements
 	private SlidingMenu slidingMenu;
 
 	private long exitTime = 0;
+	// ******二维码扫描*******
+	public static int QR_REQUEST_CODE = 1011;//二维码扫描请求码
+	private CarJsonParser mCarJsonParser;//汽车json解析类
+	private CarDBDao mCarDBDao;//汽车数据库获取类
 
 	/**
 	 * 重写返回键
@@ -97,7 +113,18 @@ public class MainActivity extends SlidingFragmentActivity implements
 		initMapView();
 		// 加载侧滑
 		initSlidingMeun();
+		//初始化二维码
+		initQRScan();
 		Configs mConfigs = new Configs(MainActivity.this);
+	}
+	/*
+	 * 二维码扫描初始化
+	 */
+	private void initQRScan() {
+		// TODO Auto-generated method stub
+        mCarJsonParser = new CarJsonParser();
+        mCarJsonParser.setCallBack(MainActivity.this);
+        mCarDBDao  = new CarDBDao(MainActivity.this);
 	}
 
 	/**
@@ -304,7 +331,14 @@ public class MainActivity extends SlidingFragmentActivity implements
 		}
 	}
 	/*
-	 * 登陆方法
+	 * 二维码扫描OnClick()
+	 */
+    public void onQRScan(View view){
+   	 Intent mIntent = new Intent(MainActivity.this,CaptureActivity.class);
+   	 startActivityForResult(mIntent,QR_REQUEST_CODE);
+   }
+	/*
+	 * 登陆按钮OnClick()
 	 */
 	public void onLogin(){
 	   	final View mView  = LayoutInflater.from(MainActivity.this).inflate(R.layout.activity_login,null);
@@ -352,7 +386,6 @@ public class MainActivity extends SlidingFragmentActivity implements
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-
 		if (requestCode == START) {
 			if (!data.getStringExtra("value").equals("")) {
 				routePlan_start_tv.setText(data.getStringExtra("value"));
@@ -360,14 +393,18 @@ public class MainActivity extends SlidingFragmentActivity implements
 			}
 
 		}
-
 		else if (requestCode == END) {
 			if (!data.getStringExtra("value").equals("")) {
 				routePlan_end_tv.setText(data.getStringExtra("value"));
 			}
-
 		}
-
+		//二维码扫描结果返回
+		else if(requestCode==QR_REQUEST_CODE&&resultCode==RESULT_OK){
+	    		Bundle extras = data.getExtras();
+	    		String result = extras.getString("result");
+	    		//Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+	    		mCarJsonParser.parseCarJson(result);
+		}
 	}
 
 	@Override
@@ -391,6 +428,50 @@ public class MainActivity extends SlidingFragmentActivity implements
 	protected void onDestroy() {
 		mapView.onDestroy();
 		super.onDestroy();
+	}
+	//json解析接口回调
+	@Override
+	public void onCompleted(Car mCar) {
+		// TODO Auto-generated method stub
+		final Car mCar2 = mCar;
+		Toast.makeText(MainActivity.this, mCar2.toString(), Toast.LENGTH_SHORT).show();
+		mCarDBDao.insertRow(mCar);
+		new Thread(){
+			public void run() {
+				try {
+					URL mUrl = new URL(Configs.URL_CARPOST);
+					HttpURLConnection mConnection = (HttpURLConnection) mUrl.openConnection();
+					mConnection.setConnectTimeout(3000);//设置连接超时
+					mConnection.setRequestMethod("POST");
+					mConnection.setDoInput(true);//是否允许输出，默认为true
+					mConnection.setDoOutput(true);//是否允许输入，默认为false
+					mConnection.setUseCaches(false);//url是否缓存
+					mConnection.setRequestProperty("Content-Type","application/x-java-serialized-object");
+					ObjectOutputStream mStream = new ObjectOutputStream(mConnection.getOutputStream());
+					mStream.writeObject(mCar2);
+					mStream.flush();// 刷新对象输出流，将任何字节都写入潜在的流中（些处为ObjectOutputStream）   
+					mStream.close();// 关闭流对象。此时，不能再向对象输出流写入任何数据，先前写入的数据存在于内存缓冲区中,   
+					// 在调用下边的getInputStream()函数时才把准备好的http请求正式发送到服务器  !!!!!
+					mConnection.getInputStream();//必须调用
+					mConnection.disconnect();
+//					int ResultCode = mConnection.getResponseCode();
+//					if(HttpURLConnection.HTTP_OK==ResultCode){
+//						System.out.println("HTTP_OK");
+//					}else{
+//						System.out.println("ResponceCode="+ResultCode);
+//					}
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			};
+		}.start();
 	}
 
 }

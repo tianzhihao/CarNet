@@ -6,9 +6,13 @@ import android.content.SharedPreferences.Editor;
 
 public class Configs {
 	public static String ISlOGIN = "ISLOGIN";//是否已经登陆
-	public static String PREFERENCESNAME = "MYCONFIGS";
-	public static String USERNAME = "USERNAME";
-	public static String URL_LOGIN = "http://10.0.2.2:8081/CarServer/login.jsp";
+	public static String PREFERENCESNAME = "MYCONFIGS";//Preference 名称
+	public static String USERNAME = "USERNAME";//用户名
+	public static String MPNUMBER = "MPNUMBER";//手机号
+	public static String PASSWORD = "PASSWORD";//密码
+	public static String UID = "UID";//用户id
+	public static String URL_LOGIN = "http://192.168.1.103:8081/CarServer/login.jsp";
+	public static String URL_CARPOST = "http://192.168.1.103:8081/CarServer/caraction.jsp";
 	private static Context mContext;
 	private static SharedPreferences mPreferences;
 	private static Editor mEditor;
